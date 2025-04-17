@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { encrypt } from '$lib/encryption';
-import { styles } from '$lib/generation';
+import { styles, generateAnswer } from '$lib/generation';
 
 export const GET: RequestHandler = ({ url }) => {
 
@@ -23,7 +23,8 @@ export const GET: RequestHandler = ({ url }) => {
 
     const payload = {
         nonce: nonce,
-        created: now
+        created: now,
+        answer: generateAnswer(style),
     }
 
     const payloadString = JSON.stringify(payload);
